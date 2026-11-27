@@ -15,9 +15,11 @@ When the next pair opens, may the pause be kind to you too. The chair is pulled 
 
 
 def main() -> None:
+    text = TEXT.strip() + "\n"
+    assert len(text) <= 500, "entry text must stay within 500 characters"
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
-        f.write(TEXT)
+        f.write(text)
 
 
 if __name__ == "__main__":
