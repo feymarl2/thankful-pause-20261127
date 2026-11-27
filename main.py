@@ -14,12 +14,19 @@ When the next pair opens, may the pause be kind to you too. The chair is pulled 
 """
 
 
-def main() -> None:
+def build_text() -> str:
     text = TEXT.strip() + "\n"
+    assert text.strip(), "entry text must not be empty"
     assert len(text) <= 500, "entry text must stay within 500 characters"
+    return text
+
+
+def main() -> None:
     os.makedirs("/output", exist_ok=True)
-    with open("/output/entry.txt", "w", encoding="utf-8") as f:
-        f.write(text)
+    tmp_path = "/output/entry.txt.tmp"
+    with open(tmp_path, "w", encoding="utf-8") as f:
+        f.write(build_text())
+    os.replace(tmp_path, "/output/entry.txt")
 
 
 if __name__ == "__main__":
